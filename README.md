@@ -62,7 +62,7 @@ Creating file as ansiblesecret.json with following content
     "ansible_vault_passwd": "jYJrbkjtYNqzvHBG8vLuGDtWjWB2ITJyaUL5zt1dFun3DZLzH19P5KBWpR2W5RmyiUPCGBu1zWEVVq6P"
 }
 ```
-Run the following commands after we have assigned the IAM roles to instance
+Run the following [AWS cli command of secret manager ](https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/create-secret.html) after we have assigned the IAM roles to instance. 
 
 ```
 
@@ -80,7 +80,7 @@ aws secretsmanager create-secret --name ansible/vaultpassword  --description "Se
 
 ```
 
-Alternatively, you can create this manually through the [AWS secre manager console](https://ap-south-1.console.aws.amazon.com/secretsmanager/home) 
+Alternatively, you can create this manually through the [AWS secret manager console](https://ap-south-1.console.aws.amazon.com/secretsmanager/home) 
 
 
 ## Create a retrive-secrets.sh file with the following content
