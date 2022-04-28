@@ -78,7 +78,7 @@ Creating file as ansiblesecret.json with following content
 }
 
 ```
-Run the following [AWS cli command of secret manager ](https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/create-secret.html) after we have assigned the IAM roles to instance. 
+Run the following [AWS CLI command of secret manager ](https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/create-secret.html) after we have assigned the IAM roles to instance. 
 
 ```
 
