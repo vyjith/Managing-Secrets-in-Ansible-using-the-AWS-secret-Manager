@@ -21,10 +21,10 @@ We will be using ansible vault to encrypt the sensitive field of the application
 * Build the property file and place the file (with decrypted value) in the target host.
 
 
-## Prerequisites
+## Pre-Requestes (Packages Installation)
 -------------------------------------------------- 
 
-* AWS cli installed on your server.
+* [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed on your server.
 
 * jq installed on your server
 
@@ -35,7 +35,21 @@ We will be using ansible vault to encrypt the sensitive field of the application
 -------------------------------------------------- 
 
 ```
+
 ansible-vault encrypt credentials.yml
+
+```
+> Output of encrypted password file
+```
+$ cat credentials.yml 
+$ANSIBLE_VAULT;1.1;AES256
+31633731383366336630323537663937366665333830366633376534393437633332336231663331
+3963356662623039663461343939396566353438333537610a366438373937616235613133646436
+38336561373831306634326430343235373239386333383961313363343362623135346164343864
+3263373866373437330a636134616432666663303036373663383535666664363239393232643632
+32613835323636306234653633393661653966306137616139646666356334636438666131366666
+3666343364623336363233663337366636643466333333373637
+
 ```
 
 
@@ -58,9 +72,11 @@ Following script will fetch the password from AWS secrets manager and pass to An
 Creating file as ansiblesecret.json with following content
 
 ```
+
 {
     "ansible_vault_passwd": "jYJrbkjtYNqzvHBG8vLuGDtWjWB2ITJyaUL5zt1dFun3DZLzH19P5KBWpR2W5RmyiUPCGBu1zWEVVq6P"
 }
+
 ```
 Run the following [AWS cli command of secret manager ](https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/create-secret.html) after we have assigned the IAM roles to instance. 
 
@@ -86,6 +102,7 @@ Alternatively, you can create this manually through the [AWS secret manager cons
 ## Create a retrive-secrets.sh file with the following content
 
 ```sh
+
 #! /bin/bash
 
 credentials=`aws secretsmanager get-secret-value --secret-id ansible/vaultpassword --region ap-south-1 | jq -r '.SecretString' | jq -r '.ansible_vault_passwd'`
@@ -96,17 +113,21 @@ echo ${credentials}
 Providing an execution permission for the script
 
 ```
+
 chmod +x retrive-secrets.sh
+
 ```
 
 Lets run the playbook 
 
 ```
+
 ansible-playbook main.yml --vault-password-file ./retrive-secrets.sh
 
 ```
 > output
 ```
+
 [ec2-user@ip-172-31-44-255 usercreation]$ ansible-playbook -i hosts main.yml --vault-password-file ./retrive-secrets.sh
 
 
@@ -121,8 +142,17 @@ changed: [localhost]
 
 PLAY RECAP **********************************************************************************************************************************************
 localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
 ```
 If you are not mentioned the password file, you will get an error since your already encrypted your credentials varribale file.
 
+## Conclusion
+
+It is an article for ansible vault to encrypt the sensitive field of the application properites and store the ansible vault passowrd in AWS secret manager. Please contact me if you have any questions in this section. Thank you!
+
+### ⚙️ Connect with Me
+<p align="center">
+<a href="https://www.instagram.com/iamvyjith/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/></a>
+<a href="https://www.linkedin.com/in/vyjith-ks-3bb8b7173/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
 
 
