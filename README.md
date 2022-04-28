@@ -5,6 +5,7 @@
 
 In this section I am going to encrypt only my variable file, you can also encrypt your main playbook.
 
+**The biggest downside of the ansible vault is that if you forget your vault password, you won't be able to recover it. To avoid this, save your ansible vault password on AWS SecretManager.**
 
 ## Description
 -------------------------------------------------- 
