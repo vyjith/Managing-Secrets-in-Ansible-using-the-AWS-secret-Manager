@@ -6,7 +6,7 @@
 In this section I am going to encrypt only my variable file, you can also encrypt your main playbook.
 
 
-# Description
+## Description
 -------------------------------------------------- 
 
 We will be using ansible vault to encrypt the sensitive field of the application properites and store the ansible vault passowrd in AWS secret manager. We be achiving the following:-
