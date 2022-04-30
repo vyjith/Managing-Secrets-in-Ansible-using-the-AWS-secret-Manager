@@ -1,6 +1,6 @@
 
 
-# Managing ansible vault password using the AWS secret Manager.
+# Ansible Vault secrets manage using AWS secret manager
 
 
 In this section I am going to encrypt only my variable file, you can also encrypt your main playbook.
